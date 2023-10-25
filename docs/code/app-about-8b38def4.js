@@ -1,4 +1,4 @@
-import{i as at,s as $t,x as mt,e as gt}from"./index-62b5c060.js";const yt=at`
+import{i as at,s as $t,x as mt,e as gt}from"./index-b8121123.js";const yt=at`
   @media(min-width: 1000px) {
     sl-card {
       max-width: 70vw;
@@ -256,4 +256,4 @@ lit-html/directives/class-map.js:
         </sl-card>
       </main>
     `}};B.styles=[At,yt];B=te([gt("app-about")],B);export{B as AppAbout};
-//# sourceMappingURL=app-about-f95456c4.js.map
+//# sourceMappingURL=app-about-8b38def4.js.map
