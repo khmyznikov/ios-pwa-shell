@@ -19,7 +19,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="ms-auth-test" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
+
   <!-- This tag is used by the ms-auth-test CLI to identify template projects. Don't remove if you are using the CLI. -->
   <meta name="pwa-starter-template-identity" content="pwa-starter"/>
 
@@ -41,10 +41,10 @@
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register(
-        '/sw.js'
+        '/ios-pwa-shell/sw.js',
+        { scope: '/ios-pwa-shell/' }
       );
     }
   </script>
 </body>
-
 </html>

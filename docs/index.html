@@ -19,7 +19,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="ms-auth-test" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
+
   <!-- This tag is used by the ms-auth-test CLI to identify template projects. Don't remove if you are using the CLI. -->
   <meta name="pwa-starter-template-identity" content="pwa-starter"/>
 
@@ -32,7 +32,7 @@
   <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 
   
-  <script type="module" crossorigin src="/ios-pwa-shell/code/index-b8121123.js"></script>
+  <script type="module" crossorigin src="/ios-pwa-shell/code/index-62b5c060.js"></script>
   <link rel="stylesheet" href="/ios-pwa-shell/code/index-30d7048d.css">
 </head>
 
@@ -43,10 +43,10 @@
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register(
-        '/sw.js'
+        '/ios-pwa-shell/sw.js',
+        { scope: '/ios-pwa-shell/' }
       );
     }
   </script>
 </body>
-
 </html>

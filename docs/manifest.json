@@ -1,9 +1,9 @@
 {
-  "id": "/",
-  "scope": "/",
+  "id": "/ios-pwa-shell/",
+  "scope": "/ios-pwa-shell/",
   "name": "ms-auth-test",
   "display": "standalone",
-  "start_url": "/",
+  "start_url": "/ios-pwa-shell/",
   "short_name": "starter",
   "theme_color": "#E1477E",
   "description": "This is a ms-auth-test app",
