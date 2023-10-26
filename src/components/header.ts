@@ -15,51 +15,13 @@ export class AppHeader extends LitElement {
 
   // @ts-ignore
   static styles =[ css`
-    /* header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--app-color-primary);
-      color: white;
-      height: 4em;
-      padding-left: 16px;
-      padding-top: 12px;
-
-      position: fixed;
-      left: env(titlebar-area-x, 0);
-      top: env(titlebar-area-y, 0);
-      height: env(titlebar-area-height, 50px);
-      width: env(titlebar-area-width, 100%);
-      -webkit-app-region: drag;
+    nord-top-bar{
+      padding: 10px;
+      padding-top: calc(env(safe-area-inset-top) + 5px);
+      padding-left: max(env(safe-area-inset-left), 10px);
+      padding-right: max(env(safe-area-inset-right), 10px);
+      block-size: auto;
     }
-
-    header h1 {
-      margin-top: 0;
-      margin-bottom: 0;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    nav a {
-      margin-left: 10px;
-    }
-
-    #back-button-block {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 12em;
-    }
-
-    @media(prefers-color-scheme: light) {
-      header {
-        color: black;
-      }
-
-      nav a {
-        color: initial;
-      }
-    } */
   `];
 
   async firstUpdated() {
@@ -100,7 +62,7 @@ export class AppHeader extends LitElement {
             <calcite-button icon-end="sign-in" scale="m">Sign in Redirect</calcite-button>
         </calcite-menu>
     </calcite-navigation> -->
-   
+
       <!-- <header>
 
          <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ff7089;">

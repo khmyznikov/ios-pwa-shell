@@ -1,5 +1,7 @@
 import { LitElement, css, html } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
+
+import "../components/in-app-purchase";
 // import { resolveRouterPath } from '../router';
 
 import '@nordhealth/components/lib/Button.js';
@@ -28,7 +30,7 @@ export class AppHome extends LitElement {
   // For more information on using properties and state in lit
   // check out this link https://lit.dev/docs/components/properties/
   @property() message = 'Welcome!';
-  
+
   @state() pushLog = '';
   @state() iapLog = '';
   @state() iOSPushCapability = false;
@@ -40,6 +42,9 @@ export class AppHome extends LitElement {
     css`
 		nord-card{
 			max-width: 400px;
+		}
+		iap-card{
+			max-width: 800px;
 		}
 		.stack{
 			padding: 15px;
@@ -66,30 +71,11 @@ export class AppHome extends LitElement {
 			this.logMessage(event.detail);
 		}
 	});
-	
+
 	// @ts-ignore
 	window.addEventListener('push-notification', (event: CustomEvent) => {
 		if (event && event.detail){
 			this.logMessage(JSON.stringify(event.detail));
-		}
-	});
-
-	// @ts-ignore
-	window.addEventListener('iap-transactions-result', (event: CustomEvent) => {
-		if (event && event.detail) { 
-			this.logMessage(event.detail, true);
-		}
-	});
-	// @ts-ignore
-	window.addEventListener('iap-purchase-result', (event: CustomEvent) => {
-		if (event && event.detail) { 
-			this.logMessage(event.detail, true);
-		}
-	});
-	// @ts-ignore
-	window.addEventListener('iap-products-result', (event: CustomEvent) => {
-		if (event && event.detail) { 
-			this.logMessage(event.detail, true);
 		}
 	});
 
@@ -98,10 +84,6 @@ export class AppHome extends LitElement {
 	}
 	if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.print) {
 		this.iOSPrintCapability = true;
-	}
-
-	if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers['iap-purchase-request'] && window.webkit.messageHandlers['iap-transactions-request'] && window.webkit.messageHandlers['iap-products-request']) {
-		this.iOSIAPCapability = true;
 	}
   }
 
@@ -159,18 +141,20 @@ export class AppHome extends LitElement {
 						<nord-button variant="primary" @click="${this.pushPermissionRequest}">Push Permission</nord-button>
 						<nord-button variant="primary" @click="${this.pushPermissionState}">Push State</nord-button>
 					</nord-stack>
-					<nord-textarea readonly value="${this.pushLog}" placeholder="events log"></nord-textarea>
+					<nord-textarea readonly expand value="${this.pushLog}" placeholder="events log"></nord-textarea>
 				</nord-fieldset>
-				<nord-divider></nord-divider>
+				<!--<nord-divider></nord-divider>
 				<nord-fieldset label="In-App Purchase">
 					<nord-button variant="primary" @click="${this.productsRequest}">Products</nord-button>
 					<nord-button variant="primary" @click="${this.transactionsRequest}">Transactions</nord-button>
 					<nord-button variant="primary" @click="${this.purchaseRequest}">Purchase</nord-button>
-					<nord-textarea readonly value="${this.iapLog}" placeholder="events log"></nord-textarea>
-				</nord-fieldset>
+					<nord-textarea readonly expand value="${this.iapLog}" placeholder="events log"></nord-textarea>
+				</nord-fieldset>-->
 			</nord-stack>
 			<p slot="header-end">Call native APIs from WebView</p>
 		</nord-card>
+
+		<iap-card></iap-card>
 
 		<nord-card padding="none">
 			<h2 slot="header">Web APIs demos</h2>
@@ -204,7 +188,7 @@ export class AppHome extends LitElement {
 		<iframe width="100%" height="180" src="https://www.youtube.com/embed/ebYYqqGeKkU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</nord-card>
 
-		
+
 	</nord-stack>
     </main>
     `;
