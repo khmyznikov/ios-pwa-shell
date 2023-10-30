@@ -4,16 +4,20 @@
   Check here https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties for more info on using CSS variables.
 */
 :root {
-  --font-family: sans-serif;
+  --n-color-accent: #FF2F92;
+  --n-color-accent-secondary: #FF2F92;
+  --n-tab-color: #d12a7b;
+  --n-color-text-link: #d12a7b;
 }
 
 html, body {
-  font-family: var(--font-family);
+  font-family: var(--n-font-family);
   padding: 0;
   margin: 0;
+  background-color: #f1f1f1;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
 
   html,
   body {
@@ -29,4 +33,4 @@ html, body {
     background-color: #f5f5f5;
     color: black;
   }
-}
+} */

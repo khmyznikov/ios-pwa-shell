@@ -17,7 +17,7 @@ export class AppHeader extends LitElement {
   static styles =[ css`
     nord-top-bar{
       padding: 10px;
-      padding-top: calc(env(safe-area-inset-top) + 5px);
+      padding-top: max(calc(env(safe-area-inset-top) + 5px), 10px);
       padding-left: max(env(safe-area-inset-left), 10px);
       padding-right: max(env(safe-area-inset-right), 10px);
       block-size: auto;
@@ -48,10 +48,10 @@ export class AppHeader extends LitElement {
     return html`
     <nord-top-bar>
       <h1 class="n-typescale-l">Apple PWA Shell</h1>
-      <nord-button href="#" size="m" variant="default" slot="end">
+      <!--<nord-button href="#" size="m" variant="default" slot="end">
         <nord-icon slot="start" name="interface-login"></nord-icon>
         Sign in Redirect
-      </nord-button>
+      </nord-button>-->
       <!-- <div slot="end" id="appleid-signin" data-color="black" data-border="true" data-type="sign in"></div> -->
     </nord-top-bar>
         <!-- <calcite-navigation slot="header">
