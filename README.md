@@ -1,35 +1,11 @@
-# PWA Starter
+## iOS PWA Shell (iPadOS/MacOS)
 
-[**Straight to Full Documentation**](https://docs.pwabuilder.com/#/starter/quick-start)
+[**Heavilly based on PWA Starter**](https://docs.pwabuilder.com/#/starter/quick-start)
 
-The PWABuilder pwa-starter is our opinionated, best practices, production tested starter that we use to build all of our PWAs, including [PWABuilder itself](https://blog.pwabuilder.com/posts/introducing-the-brand-new-pwa-builder/)! The pwa-starter is a starter codebase, just like create-react-app or the Angular CLI can generate, that uses the PWABuilder team&#39;s preferred front-end tech stack. We also have a CLI tool to allow you to create a PWA template from the command line.
+This Demo PWA project is a child project of [ios-pwa-wrap](https://github.com/khmyznikov/ios-pwa-wrap)
 
-## Jump Right In
+Most of the Demos works only under WKWebView of the related xcode project.
 
-Install the PWABuilder CLI:
+![home screen](https://github.com/khmyznikov/ios-pwa-shell/assets/6115884/401d5729-17df-4d46-9a07-fafafdd80b76)
 
-`npm i -g @pwabuilder/cli`
-
-And create a new app with this command:
-
-`pwa create`
-
-And start your app locally with:
-
-`pwa start`
-
-And that's it! Good luck on your Progressive Web App adventure!
-
-## More Info
-
-[![Get started with the pwa-starter!](https://img.youtube.com/vi/u3pWKpmic_k/0.jpg)](https://www.youtube.com/watch?v=u3pWKpmic_k)
-
-With it you get an app that:
-- Has no build system to set up and no boilerplate code to add. Everything is included out of the box.
-- Has a Service Worker system using [Workbox](https://developers.google.com/web/tools/workbox/)
-- Scores close to 100 on Lighthouse out of the box
-- Has everything needed to be installable in the browser
-- Is ready to be package for the app stores using [PWABuilder](https://www.pwabuilder.com)
-- Uses the [Azure Static Web Apps CLI](https://azure.github.io/static-web-apps-cli) which enables emulating your production environment locally, and gets you ready for deploying to Azure Static Web Apps!
-
-and all with just a few button clicks 😊.
+_WIP, not a final code_
