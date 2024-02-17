@@ -2,6 +2,7 @@ import { LitElement, css, html } from 'lit';
 import { property, customElement, state } from 'lit/decorators.js';
 
 import "../components/in-app-purchase";
+import "../components/push";
 // import { resolveRouterPath } from '../router';
 
 import '@nordhealth/components/lib/Button.js';
@@ -31,11 +32,7 @@ export class AppHome extends LitElement {
   // check out this link https://lit.dev/docs/components/properties/
   @property() message = 'Welcome!';
 
-  @state() pushLog = '';
-  @state() iapLog = '';
-  @state() iOSPushCapability = false;
   @state() iOSPrintCapability = false;
-  @state() iOSIAPCapability = false;
 
   static styles = [
     // styles,
@@ -49,44 +46,41 @@ export class AppHome extends LitElement {
 		.stack{
 			padding: 15px;
 		}
+		.download-stack a{
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+		}
   `];
 
-	logMessage(message: string, iap?: boolean){
-		console.log(message);
-		this[iap? 'iapLog': 'pushLog'] += `>: ${message}\r\n`;
+	async firstUpdated() {
+		if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.print) {
+			this.iOSPrintCapability = true;
+		}
 	}
 
-  async firstUpdated() {
-
-	// @ts-ignore
-	window.addEventListener('push-permission-request', (event: CustomEvent) => {
-		if (event && event.detail){
-			this.logMessage(event.detail);
-		}
-	});
-
-	// @ts-ignore
-	window.addEventListener('push-permission-state', (event: CustomEvent) => {
-		if (event && event.detail){
-			this.logMessage(event.detail);
-		}
-	});
-
-	// @ts-ignore
-	window.addEventListener('push-notification', (event: CustomEvent) => {
-		if (event && event.detail){
-			this.logMessage(JSON.stringify(event.detail));
-		}
-	});
-
-	if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers['push-permission-request'] && window.webkit.messageHandlers['push-permission-state']) {
-		this.iOSPushCapability = true;
+	alertMessage() {
+		alert("Alert Box");
 	}
-	if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.print) {
-		this.iOSPrintCapability = true;
+	confirmMessage() {
+		if(confirm("Confirm?"))
+			alert("Confirmed");
+		else
+			alert("Rejected");
 	}
-  }
+	promptMessage() {
+		alert(prompt("Question", "Answer"));
+	}
 
+	blobDownload(event: Event) {
+		const link = event.target as HTMLLinkElement;
+		const blob = new Blob([JSON.stringify({ x: 42, s: "hello, world", d: new Date() })], {type: "octet/stream"});
+		const url = URL.createObjectURL(blob);
+
+		link.href = url;
+		// @ts-ignore
+		link.download = 'data_example_blob.json';
+	}
 
 	printRequest(){
 		if (this.iOSPrintCapability)
@@ -94,31 +88,6 @@ export class AppHome extends LitElement {
 		else
 			window.print();
 	}
-
-	pushPermissionRequest(){
-		if (this.iOSPushCapability)
-			window.webkit.messageHandlers['push-permission-request'].postMessage('push-permission-request');
-	}
-
-	pushPermissionState(){
-		if (this.iOSPushCapability)
-			window.webkit.messageHandlers['push-permission-state'].postMessage('push-permission-state');
-	}
-
-
-	purchaseRequest(){
-		if (this.iOSIAPCapability)
-			window.webkit.messageHandlers['iap-purchase-request'].postMessage('demo_subscription_auto'); //window.products[1].attributes.offerName
-	}
-	transactionsRequest(){
-		if (this.iOSIAPCapability)
-			window.webkit.messageHandlers['iap-transactions-request'].postMessage('request');
-	}
-	productsRequest(){
-		if (this.iOSIAPCapability)
-			window.webkit.messageHandlers['iap-products-request'].postMessage(['demo_product_id', 'demo_product2_id', 'demo_subscription', 'demo_subscription_auto']);
-	}
-
 
   render() {
     return html`
@@ -131,25 +100,23 @@ export class AppHome extends LitElement {
 			<nord-stack>
 				<nord-fieldset label="Common">
 					<nord-stack direction="horizontal">
-						<nord-button variant="primary" @click="${this.printRequest}">Print Page</nord-button>
-						<nord-button variant="primary" @click="${() => alert("alert box")}">Alert</nord-button>
+						<nord-button variant="primary" @click="${this.printRequest}">Print</nord-button>
+						<nord-button variant="primary" @click="${this.alertMessage}">Alert</nord-button>
+						<nord-button variant="primary" @click="${this.confirmMessage}">Confirm</nord-button>
+						<nord-button variant="primary" @click="${this.promptMessage}">Prompt</nord-button>
 					</nord-stack>
 				</nord-fieldset>
 				<nord-divider></nord-divider>
-				<nord-fieldset label="Push Notifications">
-					<nord-stack direction="horizontal">
-						<nord-button variant="primary" @click="${this.pushPermissionRequest}">Push Permission</nord-button>
-						<nord-button variant="primary" @click="${this.pushPermissionState}">Push State</nord-button>
+				<nord-fieldset label="File Download">
+					<nord-stack direction="vertical" class="download-stack">
+						<a href="/assets/icons/icon_24.png" download="icon_example_link.png"><nord-icon class="n-nav-icon" size="m" name="interface-download"></nord-icon>Download link</a>
+						<a href="data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==" download="text_example_base64.txt"><nord-icon class="n-nav-icon" size="m" name="interface-download"></nord-icon>Download base64</a>
+						<a @click="${this.blobDownload}" href=""><nord-icon class="n-nav-icon" size="m" name="interface-download"></nord-icon>Download Blob</a>
 					</nord-stack>
-					<nord-textarea readonly expand value="${this.pushLog}" placeholder="events log"></nord-textarea>
 				</nord-fieldset>
-				<!--<nord-divider></nord-divider>
-				<nord-fieldset label="In-App Purchase">
-					<nord-button variant="primary" @click="${this.productsRequest}">Products</nord-button>
-					<nord-button variant="primary" @click="${this.transactionsRequest}">Transactions</nord-button>
-					<nord-button variant="primary" @click="${this.purchaseRequest}">Purchase</nord-button>
-					<nord-textarea readonly expand value="${this.iapLog}" placeholder="events log"></nord-textarea>
-				</nord-fieldset>-->
+
+				<nord-divider></nord-divider>
+				<push-control></push-control>
 			</nord-stack>
 			<p slot="header-end">Call native APIs from WebView</p>
 		</nord-card>
