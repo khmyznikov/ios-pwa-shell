@@ -113,7 +113,10 @@ export class PushControl extends LitElement {
                 <nord-stack direction="horizontal">
                     <nord-button variant="primary" @click="${this.pushPermissionRequest}">Push Permission</nord-button>
                     <nord-button variant="primary" @click="${this.pushPermissionState}">Push State</nord-button>
-                    <nord-button variant="primary" @click="${this.pushSubscribeTopic('common', {userId:'1234'})}">Topic Subscribe</nord-button>
+                </nord-stack>
+                <br>
+                <nord-stack direction="horizontal">
+                    <nord-button variant="primary" @click="${() => this.pushSubscribeTopic('common', {userId:'1234'})}">Topic Subscribe</nord-button>
                     <nord-button variant="primary" @click="${this.pushTokenRequest}">Token</nord-button>
                 </nord-stack>
                 <nord-textarea readonly expand value="${this.pushLog}" placeholder="events log"></nord-textarea>
