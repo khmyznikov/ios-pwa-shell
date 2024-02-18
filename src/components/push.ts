@@ -12,10 +12,9 @@ export class PushControl extends LitElement {
     @state() pushLog = '';
     @state() iOSPushCapability = false;
 
-    logMessage(message: string, consoleOnly = false) {
-        if (consoleOnly)
-            console.log(JSON.parse(message));
-        else this.pushLog += `>: ${message}\r\n`
+    logMessage(message: string) {
+        console.log(JSON.parse(message));
+        this.pushLog += `>: ${message}\r\n`
     }
 
     async firstUpdated() {
