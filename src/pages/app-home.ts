@@ -114,13 +114,10 @@ export class AppHome extends LitElement {
 						<a @click="${this.blobDownload}" href=""><nord-icon class="n-nav-icon" size="m" name="interface-download"></nord-icon>Download Blob</a>
 					</nord-stack>
 				</nord-fieldset>
-
-				<nord-divider></nord-divider>
-				<push-control></push-control>
 			</nord-stack>
 			<p slot="header-end">Call native APIs from WebView</p>
 		</nord-card>
-
+		<push-control></push-control>
 		<iap-card></iap-card>
 
 		<nord-card padding="none">
