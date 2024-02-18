@@ -13,7 +13,11 @@ export class PushControl extends LitElement {
     @state() iOSPushCapability = false;
 
     logMessage(message: string) {
-        console.log(JSON.parse(message));
+        let _toConsole = message;
+        try{
+            _toConsole = JSON.parse(message);
+        } catch(e) { }
+        console.log(_toConsole);
         this.pushLog += `>: ${message}\r\n`
     }
 
