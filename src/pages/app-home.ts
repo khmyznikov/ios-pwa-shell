@@ -109,7 +109,7 @@ export class AppHome extends LitElement {
 				<nord-divider></nord-divider>
 				<nord-fieldset label="File Download">
 					<nord-stack direction="vertical" class="download-stack">
-						<a href="/assets/icons/icon_24.png" download="icon_example_link.png"><nord-icon class="n-nav-icon" size="m" name="interface-download"></nord-icon>Download link</a>
+						<a href="/ios-pwa-shell/assets/icons/icon_24.png" download="icon_example_link.png"><nord-icon class="n-nav-icon" size="m" name="interface-download"></nord-icon>Download link</a>
 						<a href="data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==" download="text_example_base64.txt"><nord-icon class="n-nav-icon" size="m" name="interface-download"></nord-icon>Download base64</a>
 						<a @click="${this.blobDownload}" href=""><nord-icon class="n-nav-icon" size="m" name="interface-download"></nord-icon>Download Blob</a>
 					</nord-stack>
