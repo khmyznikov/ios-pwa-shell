@@ -30,6 +30,15 @@ export class PushControl extends LitElement {
         window.addEventListener('push-permission-request', (event: CustomEvent) => {
             if (event && event.detail){
                 this.logMessage(event.detail);
+
+                switch (event.detail) {
+                    case 'granted':
+                      // permission granted
+                      break;
+                    default:
+                      // permission denied
+                      break;
+                  }
             }
         });
 
@@ -37,6 +46,24 @@ export class PushControl extends LitElement {
         window.addEventListener('push-permission-state', (event: CustomEvent) => {
             if (event && event.detail){
                 this.logMessage(event.detail);
+
+                switch (event.detail) {
+                    case 'notDetermined':
+                      // permission not asked
+                      break;
+                    case 'denied':
+                      // permission denied
+                      break;
+                    case 'authorized':
+                    case 'ephemeral':
+                    case 'provisional':
+                      // permission granted
+                      break;
+                    case 'unknown':
+                    default:
+                      // something wrong
+                      break;
+                }
             }
         });
 
@@ -65,6 +92,16 @@ export class PushControl extends LitElement {
 			window.webkit.messageHandlers['push-permission-state'].postMessage('push-permission-state');
 	}
 
+    pushSubscribeTopic(topic: string, eventValue: unknown, unsubscribe?: boolean) {
+        if (this.iOSPushCapability) {
+          window.webkit.messageHandlers['push-subscribe'].postMessage(JSON.stringify({
+            topic, // topic name to subscribe/unsubscribe
+            eventValue, // user object: name, email, id, etc.
+            unsubscribe // true/false
+          }));
+        }
+    }
+
 	pushTokenRequest(){
 		if (this.iOSPushCapability)
 			window.webkit.messageHandlers['push-token'].postMessage('push-token');
@@ -76,6 +113,7 @@ export class PushControl extends LitElement {
                 <nord-stack direction="horizontal">
                     <nord-button variant="primary" @click="${this.pushPermissionRequest}">Push Permission</nord-button>
                     <nord-button variant="primary" @click="${this.pushPermissionState}">Push State</nord-button>
+                    <nord-button variant="primary" @click="${this.pushSubscribeTopic('common', {userId:'1234'})}">Topic Subscribe</nord-button>
                     <nord-button variant="primary" @click="${this.pushTokenRequest}">Token</nord-button>
                 </nord-stack>
                 <nord-textarea readonly expand value="${this.pushLog}" placeholder="events log"></nord-textarea>
