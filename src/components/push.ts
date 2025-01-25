@@ -75,6 +75,13 @@ export class PushControl extends LitElement {
         });
 
         // @ts-ignore
+        window.addEventListener('push-notification-click', (event: CustomEvent) => {
+            if (event && event.detail){
+                this.logMessage(JSON.stringify(event.detail));
+            }
+        });
+
+        // @ts-ignore
         window.addEventListener('push-token', (event: CustomEvent) => {
             if (event && event.detail){
                 this.logMessage(JSON.stringify(event.detail));
