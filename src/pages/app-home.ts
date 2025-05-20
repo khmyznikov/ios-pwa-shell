@@ -3,6 +3,7 @@ import { property, customElement, state } from 'lit/decorators.js';
 
 import "../components/in-app-purchase";
 import "../components/push";
+import "../components/health-kit";
 // import { resolveRouterPath } from '../router';
 
 import '@nordhealth/components/lib/Button.js';
@@ -119,7 +120,7 @@ export class AppHome extends LitElement {
 		</nord-card>
 		<push-control></push-control>
 		<iap-card></iap-card>
-
+		<health-kit-control></health-kit-control>
 		<nord-card padding="none">
 			<h2 slot="header">Web APIs demos</h2>
 			<nord-nav-group>
